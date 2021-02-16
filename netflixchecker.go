@@ -3,6 +3,8 @@ package netflixcheck
 
 import (
 	"os"
+
+	"github.com/tamboto2000/json5extract"
 )
 
 // Account contains information about Netflix account
@@ -30,5 +32,10 @@ func TestLoginPage() error {
 		return err
 	}
 
-	return nil
+	jsons, err := json5extract.FromBytes(raw)
+	if err != nil {
+		return err
+	}
+
+	return json5extract.Save(jsons)
 }
